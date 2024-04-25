@@ -146,7 +146,8 @@ class ProfileListTile extends StatelessWidget {
         ),
         child: const Icon(LineAwesomeIcons.angle_right, size:18.0, color: Colors.black),
       ) : null,
-    );
+      
+     );
   }
 }
 ////////////DashboardProfile class: class ends
