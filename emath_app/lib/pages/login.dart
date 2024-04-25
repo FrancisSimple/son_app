@@ -24,13 +24,13 @@ class _LoginPageState extends State<LoginPage> {
       body: Center(
         child: Container(
           alignment: Alignment.center,
-          height: 600,
+          height: 700,
           padding: EdgeInsets.symmetric(horizontal: 20),
           // color: Colors.amber,
           child: ListView(
             padding: EdgeInsets.all(20),
             children: [
-              Image(image: AssetImage("assets/logo.png")),
+              Image(image: AssetImage("assets/logo.png"), height: 200,),
               Center(
                 child: Text(
                   "Login",
@@ -56,14 +56,20 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: InputDecoration(
                         // alignLabelWithHint: true,
                         // icon: Icon(Icons.person_rounded),
-                        hintText: "Your Name",
+                        hintText: "Your username/email/phone",
                         prefixIcon: Icon(Icons.person),
-                        labelText: "Username",
+                        labelText: "Username/Email/Phone",
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(50)),
                         contentPadding: EdgeInsets.all(15),
                         prefixIconColor: Colors.orange[900],
                       ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter username, email or phone number";
+                        }
+                        return null;
+                      },
                       // textAlign: TextAlign.center,
                     ),
                     SizedBox(
