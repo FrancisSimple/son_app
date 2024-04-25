@@ -121,6 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                   },
                   child: Text("Don't have an account? Sign Up"))
             ],
+            
           ),
         ),
       ),
