@@ -20,8 +20,16 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.deepOrange,
+          brightness: Brightness.light,
+        ),
         useMaterial3: true,
+        brightness: Brightness.light,
+        appBarTheme: AppBarTheme(
+          centerTitle: true,
+          backgroundColor: Colors.orange,
+        ),
       ),
       routes: {
         "/": (context) => HomePage(),

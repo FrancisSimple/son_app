@@ -28,11 +28,10 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text("Scholar Opportunity Nexus"),
-        ),
+        title: Text("Scholar Opportunity Nexus"),
+        // centerTitle: true,
         // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        backgroundColor: Colors.orange,
+        // backgroundColor: Colors.orange,
       ),
       body: Container(
         alignment: Alignment.center,
