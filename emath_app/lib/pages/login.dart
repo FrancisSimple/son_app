@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 //import 'package:flutter/cupertino.dart';
+import 'package:emath_app/pages/dashboard.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter/widgets.dart';
 
@@ -84,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                     if (_loginKey.currentState!.validate()) {
                       debugPrint("Name: ${_usernameController.text}");
                       debugPrint("Password: ${_passwordController.text}");
-                      Navigator.pushNamed(context, "/dashboard");
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>DashboardProfile()));
                     }
                   },
                   child: Text("Login"),
