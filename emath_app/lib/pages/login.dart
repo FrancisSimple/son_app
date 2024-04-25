@@ -21,18 +21,21 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Center( //Center content
         child: Container(
           alignment: Alignment.center,
           height: 700,
           padding: EdgeInsets.symmetric(horizontal: 20),
           // color: Colors.amber,
-          child: ListView(
+          child: ListView( //Create scrollable Content
             padding: EdgeInsets.all(20),
             children: [
-              Image(image: AssetImage("assets/logo.png"), height: 200,),
+              Image(
+                image: AssetImage("assets/logo.png"), //SON Logo
+                height: 200,
+              ),
               Center(
-                child: Text(
+                child: Text( //Login Header Text
                   "Login",
                   style: TextStyle(
                     fontSize: 30,
@@ -40,17 +43,17 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(
+              SizedBox( // Space between Header and Form
                 height: 20,
               ),
-              Form(
+              Form( // Login Form
                 key: _loginKey,
                 child: Column(
                   children: [
                     SizedBox(
                       height: 10,
                     ),
-                    TextFormField(
+                    TextFormField( //Username
                       controller: _usernameController,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
@@ -75,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: 20,
                     ),
-                    TextFormField(
+                    TextFormField( //Password
                       controller: _passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
@@ -98,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: 10,
                     ),
-                    ElevatedButton(
+                    ElevatedButton( //Login Button
                       onPressed: () {
                         if (_loginKey.currentState!.validate()) {
                           debugPrint("Name: ${_usernameController.text}");
@@ -115,13 +118,15 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: 10,
               ),
+
+              // sign up option
               TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed("/signuppage");
-                  },
-                  child: Text("Don't have an account? Sign Up"))
+                onPressed: () {
+                  Navigator.of(context).pushNamed("/signuppage");
+                },
+                child: Text("Don't have an account? Sign Up"),
+              )
             ],
-            
           ),
         ),
       ),
