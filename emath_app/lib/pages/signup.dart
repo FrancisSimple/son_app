@@ -15,6 +15,7 @@ class _SignupPageState extends State<SignupPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Sign Up"),
+        // centerTitle: true,
       ),
     );
   }
