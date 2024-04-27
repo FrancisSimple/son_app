@@ -1,9 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:emath_app/pages/login.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,7 +24,7 @@ class _HomePageState extends State<HomePage> {
 
     _changeMode() {
       setState(() {
-        _brightness = Brightness.dark;
+        // _brightness = Brightness.dark;
       });
     }
 
