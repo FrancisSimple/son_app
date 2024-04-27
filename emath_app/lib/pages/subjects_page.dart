@@ -30,7 +30,7 @@ class _SubjectsPageState extends State<SubjectsPage> {
           centerTitle: true,
           
           actions: [
-            IconButton(onPressed: (){}, icon: const Icon(LineAwesomeIcons.user_circle),iconSize: 35,),
+            IconButton(onPressed: (){Navigator.pushReplacementNamed(context, "/dashboard");}, icon: const Icon(LineAwesomeIcons.user_circle),iconSize: 35,),
           ],
           bottom: const PreferredSize(preferredSize: Size.fromHeight(150),
           child: Padding(padding: EdgeInsets.all(10),
