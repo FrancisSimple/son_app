@@ -12,6 +12,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+  final Brightness _brightness = Brightness.light;
 
   // This widget is the root of your application.
   @override
@@ -22,10 +23,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.deepOrange,
-          brightness: Brightness.light,
+          brightness: _brightness,
         ),
         useMaterial3: true,
-        brightness: Brightness.light,
+        brightness: _brightness,
         appBarTheme: AppBarTheme(
           centerTitle: true,
           backgroundColor: Colors.orange,

@@ -54,60 +54,69 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: 10,
                     ),
-                    TextFormField( //Username
-                      controller: _usernameController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        // alignLabelWithHint: true,
-                        // icon: Icon(Icons.person_rounded),
-                        hintText: "Your username/email/phone",
-                        prefixIcon: Icon(Icons.person),
-                        labelText: "Username/Email/Phone",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50)),
-                        contentPadding: EdgeInsets.all(15),
-                        prefixIconColor: Colors.orange[900],
+                    //Username Section
+                    SizedBox(
+                      width: 280,
+                      child: TextFormField( 
+                        controller: _usernameController,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          // alignLabelWithHint: true,
+                          // icon: Icon(Icons.person_rounded),
+                          hintText: "Your username/email/phone",
+                          prefixIcon: Icon(Icons.person),
+                          labelText: "Username/Email/Phone",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50)),
+                          contentPadding: EdgeInsets.all(15),
+                          prefixIconColor: Colors.orange[900],
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter username, email or phone number";
+                          }
+                          return null;
+                        },
+                        // textAlign: TextAlign.center,
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Please enter username, email or phone number";
-                        }
-                        return null;
-                      },
-                      // textAlign: TextAlign.center,
                     ),
                     SizedBox(
                       height: 20,
                     ),
-                    TextFormField( //Password
-                      controller: _passwordController,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.password),
-                          hintText: "Your Password",
-                          labelText: "Password",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(50)),
-                          prefixIconColor: Colors.orange[900],
-                          contentPadding: EdgeInsets.all(15)),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Please enter a password";
-                        } else if (value.length < 8) {
-                          return "Password must be at least 8 characters";
-                        }
-                        return null;
-                      },
+                    //Password
+                    SizedBox(
+                      width: 280,
+                      child: TextFormField( 
+                        controller: _passwordController,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.password),
+                            hintText: "Your Password",
+                            labelText: "Password",
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(50)),
+                            prefixIconColor: Colors.orange[900],
+                            contentPadding: EdgeInsets.all(15)),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter a password";
+                          } else if (value.length < 8) {
+                            return "Password must be at least 8 characters";
+                          }
+                          return null;
+                        },
+                      ),
                     ),
                     SizedBox(
                       height: 10,
                     ),
-                    ElevatedButton( //Login Button
+                    //Login Button
+                    ElevatedButton( 
                       onPressed: () {
                         if (_loginKey.currentState!.validate()) {
                           debugPrint("Name: ${_usernameController.text}");
                           debugPrint("Password: ${_passwordController.text}");
-                          Navigator.pushNamed(context, "/dashboard");
+                          Navigator.pushReplacementNamed(context, "/dashboard");
                           // Navigator.pop(context);
                         }
                       },
@@ -123,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
               // sign up option
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed("/signuppage");
+                  Navigator.of(context).pushReplacementNamed("/signuppage");
                 },
                 child: Text("Don't have an account? Sign Up"),
               )
