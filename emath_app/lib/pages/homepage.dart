@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
+  static IconData themeIcon = Icons.dark_mode_outlined;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,8 +20,11 @@ class HomePage extends ConsumerWidget {
       Navigator.pushReplacementNamed(context, '/signuppage');
     }
 
-    ThemeNotifier themeController = ref.watch(ThemeProvider.notifier);
+    String logoLink = ref.watch(logoLinkProvider);
 
+    ThemeNotifier themeController = ref.watch(themeProvider.notifier);
+    ThemeIconNotifier themeIconController = ref.watch(themeIconProvider.notifier);
+    LogoLinkNotifier logoLinkController = ref.watch(logoLinkProvider.notifier);
     return Scaffold(
       body: Container(
         // alignment: Alignment.center,
@@ -32,7 +36,7 @@ class HomePage extends ConsumerWidget {
                 shrinkWrap: true,
                 children: [
                   Image.asset(
-                    "assets/logo.png",
+                    logoLink,
                     height: 250,
                   ),
                   Center(
@@ -86,14 +90,17 @@ class HomePage extends ConsumerWidget {
             ),
             Container(
               alignment: Alignment.bottomRight,
+              color: Colors.transparent,
               child: FloatingActionButton(
                 onPressed: () {
-                  themeController.changeTheme();debugPrint("Working");
+                  themeController.changeTheme();
+                  themeIconController.changeThemeIcon();
+                  logoLinkController.changeLogoLink();
                 },
                 shape: CircleBorder(),
-                child: Icon(Icons.dark_mode_outlined),
+                child: Icon(ref.watch(themeIconProvider)),
               ),
-            )
+            ),
           ],
         ),
       ),

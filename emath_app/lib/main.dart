@@ -15,11 +15,12 @@ void main() {
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
   static Brightness _brightness = Brightness.light;
+  static String logoLink = "assets/logo.png";
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    _brightness = ref.watch(ThemeProvider);
+    _brightness = ref.watch(themeProvider);
     return MaterialApp(
       title: 'Elective Mathematics',
       debugShowCheckedModeBanner: false,
@@ -35,8 +36,9 @@ class MyApp extends ConsumerWidget {
           backgroundColor: Colors.orange,
         ),
       ),
-      darkTheme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange)),
+      // darkTheme: ThemeData(
+      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+      // ),
       //home: SubjectsPage(),
       routes: {
         "/": (context) => HomePage(),
