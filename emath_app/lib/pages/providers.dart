@@ -52,7 +52,7 @@ class ThemeNotifier extends StateNotifier<Brightness> {
       debugPrint("Change to dark mode");
     } else{
       state = Brightness.light;
-      debugPrint("Change to dark mode");
+      debugPrint("Change to light mode");
     }
   }
   

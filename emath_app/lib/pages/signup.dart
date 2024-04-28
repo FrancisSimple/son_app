@@ -35,11 +35,14 @@ class _SignupPageState extends State<SignupPage> {
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
     ).then((value) {
-      setState(() {
-        _dob = value!;
+      if (value != null) {
+        setState(() {
+        _dob = value;
         _dobcontroller.text =
             "${_dob.day.toString()} / ${_dob.month.toString()} / ${_dob.year.toString()}";
       });
+      }
+      
     });
   }
 
@@ -311,7 +314,7 @@ class _SignupPageState extends State<SignupPage> {
                     // Sign Up Button
                     ElevatedButton(
                       onPressed: () {
-                        if (_errortextLevel == null) {
+                        if (_errortextLevel == null || _errortextSchool == "Please enter a valid school") {
                           setState(() {
                             _errortextSchool = "Please enter a valid school";
                           });
@@ -320,7 +323,7 @@ class _SignupPageState extends State<SignupPage> {
                             _errortextSchool = null;
                           });
                         }
-                        if (_errortextGender == null) {
+                        if (_errortextGender == null || _errortextGender == "Please select your gender") {
                           setState(() {
                             _errortextGender = "Please select your gender";
                           });
@@ -329,20 +332,21 @@ class _SignupPageState extends State<SignupPage> {
                             _errortextGender = null;
                           });
                         }
-                        if (_errortextLevel == null) {
+                        if (_errortextLevel == null || _errortextLevel == "Please enter a valid level") {
                           setState(() {
                             _errortextLevel = "Please enter a valid level";
                           });
-                        }else{
+                        }else {
                           setState(() {
                             _errortextLevel = null;
                           });
                         }
-                        if (_signupKey.currentState!.validate()) {
-                          debugPrint("Name: ${_emailController.text}");
-                          debugPrint("Password: ${_passwordController.text}");
+                        if (_signupKey.currentState != null && _signupKey.currentState!.validate()) {
+                          // debugPrint("Name: ${_emailController.text}");
+                          // debugPrint("Password: ${_passwordController.text}");
                           // Navigator.pop(context);
                         }
+                        // debugPrint("Gender:$_errortextGender \nSchool:$_errortextSchool \nLevel: $_errortextLevel");
                       },
                       child: Text("Sign Up"),
                     )
