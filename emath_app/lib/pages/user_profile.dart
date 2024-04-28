@@ -57,7 +57,7 @@ class _UserProfileState extends State<UserProfile> {
               child: CircleAvatar(radius:20,backgroundImage:  AssetImage("assets/download.jpeg")),
             ),
             const SizedBox(height: 10),
-            Text("Francis Kwame Sewor", style:Theme.of(context).textTheme.headlineLarge!.copyWith(color: textColor)),
+            Text("Francis Kwame Sewor", style:Theme.of(context).textTheme.headlineMedium!.copyWith(color: textColor)),
             Text("Accra-Ghana", style:Theme.of(context).textTheme.headlineSmall!.copyWith(color: textColor)),
             const SizedBox(height: 20),
             SizedBox(

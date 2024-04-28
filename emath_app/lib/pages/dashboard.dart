@@ -33,8 +33,8 @@ class _DashboardProfileState extends State<DashboardProfile> {
   }
 
   final List<Widget> pages =[
-    const UserProfile(),
     const SubjectsPage(),
+    const UserProfile(),
     const UserSettings(),
 
   ];
@@ -47,19 +47,7 @@ class _DashboardProfileState extends State<DashboardProfile> {
     ////////////page scaffold starts
     return Scaffold(
 
-      // appBar: AppBar(
-      //   backgroundColor: Colors.orangeAccent,
-      //   title: const Text("Profile"),
-      //   centerTitle: true,
-      //   actions: [
-      //     IconButton(onPressed: (){setState(() {
-      //       isDark = !isDark;
-      //       myBackgroundColor = (myBackgroundColor == Colors.white)? Colors.black: Colors.white;
-      //       textColor = (textColor == Colors.black)? Colors.white: Colors.black;
-      //     });}, icon: Icon(isDark? LineAwesomeIcons.sun: LineAwesomeIcons.moon)),
-      //   ],
-
-      // ),
+      
 
       body: pages[selectIndex],
       /////////////////Bottom navigation bar starts
@@ -69,8 +57,8 @@ class _DashboardProfileState extends State<DashboardProfile> {
         gap: 8,
         backgroundColor: const Color.fromARGB(255, 207, 174, 124),
         tabs:  const <GButton>[
-        GButton(icon: Icons.person, text:"Profile"),
         GButton(icon: Icons.book, text:"Subject"),
+        GButton(icon: Icons.person, text:"Profile"),
         GButton(icon: Icons.settings, text:"Settings"),
         ],
       ),
