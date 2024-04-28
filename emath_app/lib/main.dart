@@ -4,7 +4,6 @@ import 'package:emath_app/pages/dashboard.dart';
 import 'package:emath_app/pages/homepage.dart';
 import 'package:emath_app/pages/login.dart';
 import 'package:emath_app/pages/signup.dart';
-import 'package:emath_app/pages/subjects_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {

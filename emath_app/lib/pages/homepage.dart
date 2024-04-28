@@ -15,14 +15,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     navToLogin() {
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const LoginPage()));
+          .pushReplacement(MaterialPageRoute(builder: (context) => const LoginPage()));
     }
 
     navToSignup() {
       Navigator.pushReplacementNamed(context, '/signuppage');
     }
 
-    _changeMode() {
+    changeMode() {
       setState(() {
         // _brightness = Brightness.dark;
       });
@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
             Container(
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
-                onPressed: _changeMode,
+                onPressed: changeMode,
                 shape: CircleBorder(),
                 child: Icon(Icons.dark_mode_outlined),
               ),

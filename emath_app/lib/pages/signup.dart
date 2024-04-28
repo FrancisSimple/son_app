@@ -11,11 +11,14 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   DateTime _dob = DateTime.now();
-  var _errortextLevel, _errortextSchool;
-  
+  // ignore: prefer_typing_uninitialized_variables
+  var _errortextLevel, _errortextSchool, _errortextGender;
+
   final TextEditingController _emailController = TextEditingController();
 
   final TextEditingController _dobcontroller = TextEditingController();
+
+  final TextEditingController _genderController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
 
@@ -34,7 +37,8 @@ class _SignupPageState extends State<SignupPage> {
     ).then((value) {
       setState(() {
         _dob = value!;
-        _dobcontroller.text = "${_dob.day.toString()} / ${_dob.month.toString()} / ${_dob.year.toString()}";
+        _dobcontroller.text =
+            "${_dob.day.toString()} / ${_dob.month.toString()} / ${_dob.year.toString()}";
       });
     });
   }
@@ -129,6 +133,39 @@ class _SignupPageState extends State<SignupPage> {
                         },
                       ),
                     ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    DropdownMenu(
+                        controller: _genderController,
+                        // controller: _schoolController,
+                        width: 280,
+                        label: Text("Gender"),
+                        hintText: "Your gender",
+                        errorText: _errortextGender,
+                        // requestFocusOnTap: true,
+                        // enableFilter: true,
+                        inputDecorationTheme: InputDecorationTheme(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50)),
+                          prefixIconColor: Colors.orange[900],
+                          contentPadding: EdgeInsets.all(15),
+                        ),
+                        leadingIcon: Icon(
+                          Icons.person_outline_rounded,
+                          // color: Colors.orange[900],
+                        ),
+                        dropdownMenuEntries: [
+                          DropdownMenuEntry(value: "Male", label: "Male"),
+                          DropdownMenuEntry(value: "Female", label: "Female"),
+                        ],
+                        onSelected: (value) {
+                          if (value == null) {
+                            setState(() {
+                              _errortextGender = "Please select your gender";
+                            });
+                          }
+                        }),
                     SizedBox(
                       height: 20,
                     ),
@@ -277,6 +314,11 @@ class _SignupPageState extends State<SignupPage> {
                         if (_errortextLevel == null) {
                           setState(() {
                             _errortextSchool = "Please enter a valid school";
+                          });
+                        }
+                        if (_errortextGender == null) {
+                          setState(() {
+                            _errortextGender = "Please select your gender";
                           });
                         }
                         if (_errortextLevel == null) {
