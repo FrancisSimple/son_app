@@ -315,15 +315,27 @@ class _SignupPageState extends State<SignupPage> {
                           setState(() {
                             _errortextSchool = "Please enter a valid school";
                           });
+                        }else{
+                          setState(() {
+                            _errortextSchool = null;
+                          });
                         }
                         if (_errortextGender == null) {
                           setState(() {
                             _errortextGender = "Please select your gender";
                           });
+                        }else{
+                          setState(() {
+                            _errortextGender = null;
+                          });
                         }
                         if (_errortextLevel == null) {
                           setState(() {
                             _errortextLevel = "Please enter a valid level";
+                          });
+                        }else{
+                          setState(() {
+                            _errortextLevel = null;
                           });
                         }
                         if (_signupKey.currentState!.validate()) {
