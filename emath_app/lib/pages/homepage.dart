@@ -1,32 +1,25 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:emath_app/pages/login.dart';
+import 'package:emath_app/pages/providers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     navToLogin() {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) => const LoginPage()));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const LoginPage()));
     }
 
     navToSignup() {
       Navigator.pushReplacementNamed(context, '/signuppage');
     }
 
-    changeMode() {
-      setState(() {
-        // _brightness = Brightness.dark;
-      });
-    }
+    ThemeNotifier themeController = ref.watch(ThemeProvider.notifier);
 
     return Scaffold(
       body: Container(
@@ -94,13 +87,14 @@ class _HomePageState extends State<HomePage> {
             Container(
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
-                onPressed: changeMode,
+                onPressed: () {
+                  themeController.changeTheme();debugPrint("Working");
+                },
                 shape: CircleBorder(),
                 child: Icon(Icons.dark_mode_outlined),
               ),
             )
           ],
-          
         ),
       ),
     );

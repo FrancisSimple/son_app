@@ -3,20 +3,23 @@ import 'package:emath_app/pages/dashboard.dart';
 
 import 'package:emath_app/pages/homepage.dart';
 import 'package:emath_app/pages/login.dart';
+import 'package:emath_app/pages/providers.dart';
 import 'package:emath_app/pages/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ProviderScope(child: const MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
-  final Brightness _brightness = Brightness.light;
+  static Brightness _brightness = Brightness.light;
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    _brightness = ref.watch(ThemeProvider);
     return MaterialApp(
       title: 'Elective Mathematics',
       debugShowCheckedModeBanner: false,
@@ -32,6 +35,8 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.orange,
         ),
       ),
+      darkTheme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange)),
       //home: SubjectsPage(),
       routes: {
         "/": (context) => HomePage(),
