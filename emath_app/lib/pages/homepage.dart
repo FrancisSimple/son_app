@@ -9,11 +9,12 @@ class HomePage extends ConsumerWidget {
   const HomePage({super.key});
   static IconData themeIcon = Icons.dark_mode_outlined;
 
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     navToLogin() {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const LoginPage()));
+          MaterialPageRoute(builder: (context) =>  LoginPage()));
     }
 
     navToSignup() {
@@ -25,6 +26,9 @@ class HomePage extends ConsumerWidget {
     ThemeNotifier themeController = ref.watch(themeProvider.notifier);
     ThemeIconNotifier themeIconController = ref.watch(themeIconProvider.notifier);
     LogoLinkNotifier logoLinkController = ref.watch(logoLinkProvider.notifier);
+    SettingsThemeNotifier settingsThemeController =
+        ref.watch(settingsThemeProvider.notifier);
+
     return Scaffold(
       body: Container(
         // alignment: Alignment.center,
@@ -96,6 +100,7 @@ class HomePage extends ConsumerWidget {
                   themeController.changeTheme();
                   themeIconController.changeThemeIcon();
                   logoLinkController.changeLogoLink();
+                  settingsThemeController.changeThemeBool();
                 },
                 shape: CircleBorder(),
                 child: Icon(ref.watch(themeIconProvider)),

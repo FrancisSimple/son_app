@@ -1,18 +1,22 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:emath_app/pages/providers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SignupPage extends StatefulWidget {
-  const SignupPage({super.key});
+class SignupPage extends ConsumerWidget {
+   SignupPage({super.key});
 
-  @override
-  State<SignupPage> createState() => _SignupPageState();
-}
+  static DateTime _dob = DateTime.now();
 
-class _SignupPageState extends State<SignupPage> {
-  DateTime _dob = DateTime.now();
-  // ignore: prefer_typing_uninitialized_variables
-  var _errortextLevel, _errortextSchool, _errortextGender;
+  // // ignore: prefer_typing_uninitialized_variables
+  // static var _errortextLevel, _errortextSchool, _errortextGender;
+
+  // // ignore: prefer_typing_uninitialized_variables
+  // var _errortextLevel, _errortextSchool, _errortextGender;
+
+  // // ignore: prefer_typing_uninitialized_variables
+  // var _errortextLevel, _errortextSchool, _errortextGender;
 
   final TextEditingController _emailController = TextEditingController();
 
@@ -28,27 +32,31 @@ class _SignupPageState extends State<SignupPage> {
 
   final TextEditingController _levelController = TextEditingController();
 
-  void _showDate() {
+ 
+
+  final GlobalKey<FormState> _signupKey = GlobalKey();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    String logoLink = ref.watch(logoLinkProvider);
+     void _showDate() {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
     ).then((value) {
-      if (value != null) {
-        setState(() {
-        _dob = value;
-        _dobcontroller.text =
-            "${_dob.day.toString()} / ${_dob.month.toString()} / ${_dob.year.toString()}";
-      });
-      }
-      
+      // if (value != null) {
+      //   setState(() {
+      //     _dob = value;
+      //     _dobcontroller.text =
+      //         "${_dob.day.toString()} / ${_dob.month.toString()} / ${_dob.year.toString()}";
+      //   });
+      // }
     });
   }
+  
 
-  final GlobalKey<FormState> _signupKey = GlobalKey();
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Container(
@@ -60,7 +68,7 @@ class _SignupPageState extends State<SignupPage> {
             padding: EdgeInsets.all(20),
             children: [
               Image(
-                image: AssetImage("assets/logo.png"),
+                image: AssetImage(logoLink),
                 height: 150,
               ),
               Center(
@@ -82,7 +90,67 @@ class _SignupPageState extends State<SignupPage> {
                     SizedBox(
                       height: 10,
                     ),
-                    // Email/Username Section
+                    // Surname Section
+                    SizedBox(
+                      width: 280,
+                      child: TextFormField(
+                        // controller: _emailController,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          // alignLabelWithHint: true,
+                          // icon: Icon(Icons.person_rounded),
+                          hintText: "Your Surname",
+                          prefixIcon: Icon(Icons.person_outline),
+                          labelText: "Surname",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50)),
+                          contentPadding: EdgeInsets.all(15),
+                          prefixIconColor: Colors.orange[900],
+                        ),
+                        validator: (value) {
+                          // if (value == null || value.isEmpty) {
+                          //   return "Please enter surname";
+                          // }
+                          // return null;
+                        },
+                        // textAlign: TextAlign.center,
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 20,
+                    ),
+
+                    SizedBox(
+                      width: 280,
+                      child: TextFormField(
+                        // controller: _emailController,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          // alignLabelWithHint: true,
+                          // icon: Icon(Icons.person_rounded),
+                          hintText: "Your other names",
+                          prefixIcon: Icon(Icons.person_outline),
+                          labelText: "Other Names",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50)),
+                          contentPadding: EdgeInsets.all(15),
+                          prefixIconColor: Colors.orange[900],
+                        ),
+                        validator: (value) {
+                          // if (value == null || value.isEmpty) {
+                          //   return "Please enter surname";
+                          // }
+                          // return null;
+                        },
+                        // textAlign: TextAlign.center,
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 20,
+                    ),
+                    // Email
                     SizedBox(
                       width: 280,
                       child: TextFormField(
@@ -108,6 +176,7 @@ class _SignupPageState extends State<SignupPage> {
                         // textAlign: TextAlign.center,
                       ),
                     ),
+
                     SizedBox(
                       height: 20,
                     ),
@@ -145,7 +214,7 @@ class _SignupPageState extends State<SignupPage> {
                         width: 280,
                         label: Text("Gender"),
                         hintText: "Your gender",
-                        errorText: _errortextGender,
+                        // errorText: _errortextGender,
                         // requestFocusOnTap: true,
                         // enableFilter: true,
                         inputDecorationTheme: InputDecorationTheme(
@@ -163,11 +232,11 @@ class _SignupPageState extends State<SignupPage> {
                           DropdownMenuEntry(value: "Female", label: "Female"),
                         ],
                         onSelected: (value) {
-                          if (value == null) {
-                            setState(() {
-                              _errortextGender = "Please select your gender";
-                            });
-                          }
+                          // if (value == null) {
+                          //   setState(() {
+                          //     _errortextGender = "Please select your gender";
+                          //   });
+                          // }
                         }),
                     SizedBox(
                       height: 20,
@@ -178,7 +247,7 @@ class _SignupPageState extends State<SignupPage> {
                       width: 280,
                       label: Text("School"),
                       hintText: "Your school",
-                      errorText: _errortextSchool,
+                      // errorText: _errortextSchool,
                       requestFocusOnTap: true,
                       enableFilter: true,
                       inputDecorationTheme: InputDecorationTheme(
@@ -208,11 +277,11 @@ class _SignupPageState extends State<SignupPage> {
                             value: "Abusco", label: "Aburi Girls SHS"),
                       ],
                       onSelected: (value) {
-                        if (value == null) {
-                          setState(() {
-                            _errortextSchool = "Please enter a valid school";
-                          });
-                        }
+                        // if (value == null) {
+                        //   setState(() {
+                        //     _errortextSchool = "Please enter a valid school";
+                        //   });
+                        // }
                       },
                     ),
                     SizedBox(
@@ -224,7 +293,7 @@ class _SignupPageState extends State<SignupPage> {
                       label: Text("Level"),
                       width: 280,
                       hintText: "Your Level",
-                      errorText: _errortextLevel,
+                      // errorText: _errortextLevel,
                       requestFocusOnTap: true,
                       enableFilter: true,
                       inputDecorationTheme: InputDecorationTheme(
@@ -248,12 +317,12 @@ class _SignupPageState extends State<SignupPage> {
                         DropdownMenuEntry(value: "SHS3", label: "SHS 3"),
                       ],
                       onSelected: (value) {
-                        if (value == null) {
-                          debugPrint(value);
-                          setState(() {
-                            _errortextLevel = "Please enter a valid level";
-                          });
-                        }
+                        // if (value == null) {
+                        //   debugPrint(value);
+                        //   setState(() {
+                        //     _errortextLevel = "Please enter a valid level";
+                        //   });
+                        // }
                       },
                     ),
                     SizedBox(
@@ -314,38 +383,42 @@ class _SignupPageState extends State<SignupPage> {
                     // Sign Up Button
                     ElevatedButton(
                       onPressed: () {
-                        if (_errortextLevel == null || _errortextSchool == "Please enter a valid school") {
-                          setState(() {
-                            _errortextSchool = "Please enter a valid school";
-                          });
-                        }else{
-                          setState(() {
-                            _errortextSchool = null;
-                          });
-                        }
-                        if (_errortextGender == null || _errortextGender == "Please select your gender") {
-                          setState(() {
-                            _errortextGender = "Please select your gender";
-                          });
-                        }else{
-                          setState(() {
-                            _errortextGender = null;
-                          });
-                        }
-                        if (_errortextLevel == null || _errortextLevel == "Please enter a valid level") {
-                          setState(() {
-                            _errortextLevel = "Please enter a valid level";
-                          });
-                        }else {
-                          setState(() {
-                            _errortextLevel = null;
-                          });
-                        }
-                        if (_signupKey.currentState != null && _signupKey.currentState!.validate()) {
-                          // debugPrint("Name: ${_emailController.text}");
-                          // debugPrint("Password: ${_passwordController.text}");
-                          // Navigator.pop(context);
-                        }
+                        // if (_errortextLevel == null ||
+                        //     _errortextSchool == "Please enter a valid school") {
+                        //   setState(() {
+                        //     _errortextSchool = "Please enter a valid school";
+                        //   });
+                        // } else {
+                        //   setState(() {
+                        //     _errortextSchool = null;
+                        //   });
+                        // }
+                        // if (_errortextGender == null ||
+                        //     _errortextGender == "Please select your gender") {
+                        //   setState(() {
+                        //     _errortextGender = "Please select your gender";
+                        //   });
+                        // } else {
+                        //   setState(() {
+                        //     _errortextGender = null;
+                        //   });
+                        // }
+                        // if (_errortextLevel == null ||
+                        //     _errortextLevel == "Please enter a valid level") {
+                        //   setState(() {
+                        //     _errortextLevel = "Please enter a valid level";
+                        //   });
+                        // } else {
+                        //   setState(() {
+                        //     _errortextLevel = null;
+                        //   });
+                        // }
+                        // if (_signupKey.currentState != null &&
+                        //     _signupKey.currentState!.validate()) {
+                        //   // debugPrint("Name: ${_emailController.text}");
+                        //   // debugPrint("Password: ${_passwordController.text}");
+                        //   // Navigator.pop(context);
+                        // }
                         // debugPrint("Gender:$_errortextGender \nSchool:$_errortextSchool \nLevel: $_errortextLevel");
                       },
                       child: Text("Sign Up"),

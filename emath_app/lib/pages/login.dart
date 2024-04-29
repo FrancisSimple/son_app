@@ -2,17 +2,14 @@
 
 //import 'package:flutter/cupertino.dart';
 // import 'package:emath_app/pages/dashboard.dart';
+import 'package:emath_app/pages/providers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 //import 'package:flutter/widgets.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class LoginPage extends ConsumerWidget {
+   LoginPage({super.key});
 
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
@@ -20,7 +17,8 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _loginKey = GlobalKey();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    String logoLink = ref.watch(logoLinkProvider);
     return Scaffold(
       body: Center( //Center content
         child: Container(
@@ -32,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
             padding: EdgeInsets.all(20),
             children: [
               Image(
-                image: AssetImage("assets/logo.png"), //SON Logo
+                image: AssetImage(logoLink), //SON Logo
                 height: 200,
               ),
               Center(
