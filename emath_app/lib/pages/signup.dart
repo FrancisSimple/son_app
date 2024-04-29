@@ -102,7 +102,65 @@ class _SignupPageState extends State<SignupPage> {
                     SizedBox(
                       height: 10,
                     ),
-                    // Email/Username Section
+                    // First Name Section
+                    SizedBox(
+                      width: 280,
+                      child: TextFormField(
+                        // controller: _emailController,
+                        keyboardType: TextInputType.name,
+                        decoration: InputDecoration(
+                          // alignLabelWithHint: true,
+                          // icon: Icon(Icons.person_rounded),
+                          hintText: "Your first name",
+                          prefixIcon: Icon(Icons.person_outline),
+                          labelText: "First Name",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50)),
+                          contentPadding: EdgeInsets.all(15),
+                          prefixIconColor: Colors.orange[900],
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter your first name";
+                          }
+                          return null;
+                        },
+                        // textAlign: TextAlign.center,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    // Other name Section
+                    SizedBox(
+                      width: 280,
+                      child: TextFormField(
+                        // controller: _emailController,
+                        keyboardType: TextInputType.name,
+                        decoration: InputDecoration(
+                          // alignLabelWithHint: true,
+                          // icon: Icon(Icons.person_rounded),
+                          hintText: "Your other names",
+                          prefixIcon: Icon(Icons.person_outline),
+                          labelText: "Other Names",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50)),
+                          contentPadding: EdgeInsets.all(15),
+                          prefixIconColor: Colors.orange[900],
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter your other names";
+                          }
+                          return null;
+                        },
+                        // textAlign: TextAlign.center,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    // Email 
                     SizedBox(
                       width: 280,
                       child: TextFormField(
