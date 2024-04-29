@@ -28,7 +28,9 @@ class _SignupPageState extends State<SignupPage> {
   final TextEditingController _levelController = TextEditingController();
 
   final TextEditingController _firstNameController = TextEditingController();
-  
+
+  final TextEditingController _surnameController = TextEditingController();
+
   final TextEditingController _otherNameController = TextEditingController();
 
   Future signUp() async {
@@ -110,6 +112,35 @@ class _SignupPageState extends State<SignupPage> {
                     SizedBox(
                       width: 280,
                       child: TextFormField(
+                        controller: _surnameController,
+                        keyboardType: TextInputType.name,
+                        decoration: InputDecoration(
+                          // alignLabelWithHint: true,
+                          // icon: Icon(Icons.person_rounded),
+                          hintText: "Your Surname name",
+                          prefixIcon: Icon(Icons.person_outline),
+                          labelText: "Surname",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50)),
+                          contentPadding: EdgeInsets.all(15),
+                          prefixIconColor: Colors.orange[900],
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter your surname";
+                          }
+                          return null;
+                        },
+                        // textAlign: TextAlign.center,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    // Surname Section
+                    SizedBox(
+                      width: 280,
+                      child: TextFormField(
                         controller: _firstNameController,
                         keyboardType: TextInputType.name,
                         decoration: InputDecoration(
@@ -152,12 +183,12 @@ class _SignupPageState extends State<SignupPage> {
                           contentPadding: EdgeInsets.all(15),
                           prefixIconColor: Colors.orange[900],
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Please enter your other names";
-                          }
-                          return null;
-                        },
+                        // validator: (value) {
+                        //   if (value == null || value.isEmpty) {
+                        //     return "Please enter your other names";
+                        //   }
+                        //   return null;
+                        // },
                         // textAlign: TextAlign.center,
                       ),
                     ),
