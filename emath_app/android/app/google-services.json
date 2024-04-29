@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "880245869181",
+    "project_id": "sonemathappdatabase",
+    "storage_bucket": "sonemathappdatabase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:880245869181:android:ff23f31facb98540f1ff14",
+        "android_client_info": {
+          "package_name": "com.example.emath_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKTVTorB4Fsto3ujSKOBhVdHt5NecQUAg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
