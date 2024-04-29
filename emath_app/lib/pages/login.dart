@@ -2,6 +2,7 @@
 
 //import 'package:flutter/cupertino.dart';
 // import 'package:emath_app/pages/dashboard.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter/widgets.dart';
 
@@ -18,6 +19,19 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   final GlobalKey<FormState> _loginKey = GlobalKey();
+
+  Future signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: _usernameController.text.trim(), password: _passwordController.text.trim(),
+      );
+  }
+
+ @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                         if (_loginKey.currentState!.validate()) {
                           debugPrint("Name: ${_usernameController.text}");
                           debugPrint("Password: ${_passwordController.text}");
-                          Navigator.pushReplacementNamed(context, "/dashboard");
+                          signIn();
                           // Navigator.pop(context);
                         }
                       },

@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignupPage extends StatefulWidget {
@@ -25,6 +27,25 @@ class _SignupPageState extends State<SignupPage> {
 
   final TextEditingController _levelController = TextEditingController();
 
+  Future signUp() async {
+
+    //creating a user
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: _emailController.text.trim(), 
+      password: _passwordController.text.trim(),
+      );
+
+    //Adding user details:
+
+  }
+
+  Future addUserDetails() async {
+    await FirebaseFirestore.instance.collection("users").add({
+      ''
+    });
+  }
+
+
   void _showDate() {
     showDatePicker(
       context: context,
@@ -37,6 +58,12 @@ class _SignupPageState extends State<SignupPage> {
         _dobcontroller.text = "${_dob.day.toString()} / ${_dob.month.toString()} / ${_dob.year.toString()}";
       });
     });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 
   final GlobalKey<FormState> _signupKey = GlobalKey();

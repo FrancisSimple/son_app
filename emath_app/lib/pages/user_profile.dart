@@ -1,4 +1,5 @@
 import 'package:emath_app/pages/homepage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
@@ -17,6 +18,7 @@ class _UserProfileState extends State<UserProfile> {
   var isDark = false;
   var myBackgroundColor = Colors.white;
   var textColor = Colors.black;
+  final user = FirebaseAuth.instance.currentUser!;
   //////////////Constructor field: not compulsory
   
   //////////////Method field
@@ -57,7 +59,7 @@ class _UserProfileState extends State<UserProfile> {
               child: CircleAvatar(radius:20,backgroundImage:  AssetImage("assets/download.jpeg")),
             ),
             const SizedBox(height: 10),
-            Text("Francis Kwame Sewor", style:Theme.of(context).textTheme.headlineMedium!.copyWith(color: textColor)),
+            Text(user.email!, style:Theme.of(context).textTheme.headlineMedium!.copyWith(color: textColor)),
             Text("Accra-Ghana", style:Theme.of(context).textTheme.headlineSmall!.copyWith(color: textColor)),
             const SizedBox(height: 20),
             SizedBox(
@@ -74,7 +76,7 @@ class _UserProfileState extends State<UserProfile> {
             ProfileListTile(title: "0 Activated Topic(s)", icon: LineAwesomeIcons.check_circle, onPress:(){}, endIcon: true,textColor: textColor,),
             ProfileListTile(title: "0 Completed quizzes", icon: LineAwesomeIcons.puzzle_piece, onPress:(){}, endIcon: true,textColor: textColor,),
             ProfileListTile(title: "0 % Performance rate", icon: LineAwesomeIcons.medal, onPress:(){}, endIcon: false,textColor: textColor,),
-            ProfileListTile(title: "Logout", icon: LineAwesomeIcons.alternate_sign_out, onPress:(){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));}, endIcon: false,textColor: Colors.orange),
+            ProfileListTile(title: "Logout", icon: LineAwesomeIcons.alternate_sign_out, onPress:(){FirebaseAuth.instance.signOut();}, endIcon: false,textColor: Colors.orange),
           ],
           ),
         ),
