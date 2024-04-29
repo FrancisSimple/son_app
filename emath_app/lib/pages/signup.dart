@@ -27,6 +27,10 @@ class _SignupPageState extends State<SignupPage> {
 
   final TextEditingController _levelController = TextEditingController();
 
+  final TextEditingController _firstNameController = TextEditingController();
+  
+  final TextEditingController _otherNameController = TextEditingController();
+
   Future signUp() async {
 
     //creating a user
@@ -106,7 +110,7 @@ class _SignupPageState extends State<SignupPage> {
                     SizedBox(
                       width: 280,
                       child: TextFormField(
-                        // controller: _emailController,
+                        controller: _firstNameController,
                         keyboardType: TextInputType.name,
                         decoration: InputDecoration(
                           // alignLabelWithHint: true,
@@ -135,7 +139,7 @@ class _SignupPageState extends State<SignupPage> {
                     SizedBox(
                       width: 280,
                       child: TextFormField(
-                        // controller: _emailController,
+                        controller: _otherNameController,
                         keyboardType: TextInputType.name,
                         decoration: InputDecoration(
                           // alignLabelWithHint: true,
