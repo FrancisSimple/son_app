@@ -20,38 +20,33 @@ class _UserProfileState extends State<UserProfile> {
   var myBackgroundColor = Colors.white;
   var textColor = Colors.black;
   String userName = "";
+  String school ='';
   User user = FirebaseAuth.instance.currentUser!;
 
 @override
 void initState(){
+
   super.initState();
   fetchUserFullName();
+
 }
 
 
-  // Future<void> fetchUserFullName() async {
-    
-  //   final user = FirebaseAuth.instance.currentUser!;
-  //   final userDoc = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
-  //   final firstName = userDoc.get('firstName');
-  //   final lastName = userDoc.data()?['school']?? user.uid;
-  //   setState(() {
-  //     userName = '$firstName $lastName';
-  //   });
-    
-  // }
+  
 
   Future<void> fetchUserFullName() async {
   try {
     final user = FirebaseAuth.instance.currentUser; // Check if user is not null
     if (user != null) {
-      final userDoc = await FirebaseFirestore.instance.collection("users").doc('KjHVHZ7D0BxPbBTshZHq').get();
+      final userDoc = await FirebaseFirestore.instance.collection("users").doc(user.uid).get();
 
       if (userDoc.exists) {
         final firstName = userDoc.get('firstName');
-        final lastName = userDoc.data()?['school'] ?? '';
+        final lastName = userDoc.get('lastName');
+        final userschool = userDoc.get('school');
         setState(() {
           userName = '$firstName $lastName';
+          school = '$userschool';
         });
       } else {
         print("User document not found"); // Handle missing document (optional)
@@ -121,7 +116,7 @@ void initState(){
             const SizedBox(height: 30),
             const Divider(),
             const SizedBox(height: 10),
-            ProfileListTile(title: "Keta Senior High School", icon: LineAwesomeIcons.school,onPress: (){},endIcon: false,textColor: textColor,),
+            ProfileListTile(title: school, icon: LineAwesomeIcons.school,onPress: (){},endIcon: false,textColor: textColor,),
             ProfileListTile(title: "Year Two", icon: LineAwesomeIcons.graduation_cap, onPress:(){}, endIcon: false,textColor: textColor,),
             ProfileListTile(title: "0 SON Points", icon: LineAwesomeIcons.trophy, onPress:(){}, endIcon: false,textColor: textColor,),
             ProfileListTile(title: "0 Activated Topic(s)", icon: LineAwesomeIcons.check_circle, onPress:(){}, endIcon: true,textColor: textColor,),

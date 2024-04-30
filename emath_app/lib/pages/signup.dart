@@ -37,18 +37,19 @@ class _SignupPageState extends State<SignupPage> {
   Future signUp() async {
 
     //creating a user
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    UserCredential newUser = await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: _emailController.text.trim(), 
       password: _passwordController.text.trim(),
       );
 
     //Adding user details:
-    addUserDetails(_firstNameController.text.trim(), _surnameController.text.trim(), _emailController.text.trim(), _otherNameController.text.trim(), _schoolController.text.trim(), _dobcontroller.text.trim());
+    User? thisUser = newUser.user;
+    addUserDetails(thisUser!.uid,_firstNameController.text.trim(), _surnameController.text.trim(), _emailController.text.trim(), _otherNameController.text.trim(), _schoolController.text.trim(), _dobcontroller.text.trim());
     
   }
-
-  Future addUserDetails(String firstName,String lastName,String email,String othernames,String school,String dob) async {
-    await FirebaseFirestore.instance.collection("users").add({
+  
+  Future addUserDetails(String userId,String firstName,String lastName,String email,String othernames,String school,String dob) async {
+    await FirebaseFirestore.instance.collection("users").doc(userId).set({
       'firstName': firstName,
       'lastName': lastName,
       'otherNames': othernames,
