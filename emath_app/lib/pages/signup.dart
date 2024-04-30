@@ -44,18 +44,19 @@ class _SignupPageState extends State<SignupPage> {
 
     //Adding user details:
     User? thisUser = newUser.user;
-    addUserDetails(thisUser!.uid,_firstNameController.text.trim(), _surnameController.text.trim(), _emailController.text.trim(), _otherNameController.text.trim(), _schoolController.text.trim(), _dobcontroller.text.trim());
+    addUserDetails(thisUser!.uid,_firstNameController.text.trim(), _surnameController.text.trim(), _emailController.text.trim(), _otherNameController.text.trim(), _schoolController.text.trim(), _dobcontroller.text.trim(),_levelController.text.trim());
     
   }
   
-  Future addUserDetails(String userId,String firstName,String lastName,String email,String othernames,String school,String dob) async {
+  Future addUserDetails(String userId,String firstName,String lastName,String email,String othernames,String school,String dob,String level) async {
     await FirebaseFirestore.instance.collection("users").doc(userId).set({
       'firstName': firstName,
       'lastName': lastName,
       'otherNames': othernames,
       'email': email,
       'school': school,
-      'dateOfBirth': dob
+      'dateOfBirth': dob,
+      'year': level
 
     });
   }

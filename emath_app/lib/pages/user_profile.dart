@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:emath_app/pages/homepage.dart';
+
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -15,49 +16,57 @@ class UserProfile extends StatefulWidget {
 ////////////DashboardProfile class: class starts
 class _UserProfileState extends State<UserProfile> {
 
+  
   ///////////////data field
   var isDark = false;
   var myBackgroundColor = Colors.white;
   var textColor = Colors.black;
   String userName = "";
   String school ='';
+  String year = '';
+  String email = '';
   User user = FirebaseAuth.instance.currentUser!;
 
 @override
 void initState(){
 
   super.initState();
-  fetchUserFullName();
+
+  fetchUserDetails();
 
 }
 
 
   
 
-  Future<void> fetchUserFullName() async {
-  try {
-    final user = FirebaseAuth.instance.currentUser; // Check if user is not null
-    if (user != null) {
-      final userDoc = await FirebaseFirestore.instance.collection("users").doc(user.uid).get();
+Future<void> fetchUserDetails() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser; // Check if user is not null
+      if (user != null) {
+        final userDoc = await FirebaseFirestore.instance.collection("users").doc(user.uid).get();
 
-      if (userDoc.exists) {
-        final firstName = userDoc.get('firstName');
-        final lastName = userDoc.get('lastName');
-        final userschool = userDoc.get('school');
-        setState(() {
-          userName = '$firstName $lastName';
-          school = '$userschool';
-        });
+        if (userDoc.exists) {
+          final firstName = userDoc.get('firstName');
+          final lastName = userDoc.get('lastName');
+          final userschool = userDoc.get('school');
+          final emailAddress = userDoc.get('email');
+          final userLevel = userDoc.get('year');
+          setState(() {
+            userName = '$firstName $lastName';
+            school = '$userschool';
+            email = '$emailAddress';
+            year = '$userLevel';
+          });
+        } else {
+          print("User document not found"); // Handle missing document (optional)
+        }
       } else {
-        print("User document not found"); // Handle missing document (optional)
+        print("User not signed in"); // Handle user not signed in (optional)
       }
-    } else {
-      print("User not signed in"); // Handle user not signed in (optional)
+    } catch (error) {
+      print("Error fetching user data: $error"); // Handle errors
     }
-  } catch (error) {
-    print("Error fetching user data: $error"); // Handle errors
   }
-}
 
 
   
@@ -74,8 +83,6 @@ void initState(){
   @override
   Widget build(BuildContext context) {
 
-    
-    
     ////////////page scaffold starts
     return Scaffold(
 
@@ -106,7 +113,7 @@ void initState(){
             ),
             const SizedBox(height: 10),
             Text(userName, style:Theme.of(context).textTheme.headlineMedium!.copyWith(color: textColor)),
-            Text(user.email!, style:Theme.of(context).textTheme.headlineSmall!.copyWith(color: textColor)),
+            Text(email, style:Theme.of(context).textTheme.headlineSmall!.copyWith(color: textColor)),
             const SizedBox(height: 20),
             SizedBox(
               width: 200,
@@ -117,7 +124,7 @@ void initState(){
             const Divider(),
             const SizedBox(height: 10),
             ProfileListTile(title: school, icon: LineAwesomeIcons.school,onPress: (){},endIcon: false,textColor: textColor,),
-            ProfileListTile(title: "Year Two", icon: LineAwesomeIcons.graduation_cap, onPress:(){}, endIcon: false,textColor: textColor,),
+            ProfileListTile(title: year, icon: LineAwesomeIcons.graduation_cap, onPress:(){}, endIcon: false,textColor: textColor,),
             ProfileListTile(title: "0 SON Points", icon: LineAwesomeIcons.trophy, onPress:(){}, endIcon: false,textColor: textColor,),
             ProfileListTile(title: "0 Activated Topic(s)", icon: LineAwesomeIcons.check_circle, onPress:(){}, endIcon: true,textColor: textColor,),
             ProfileListTile(title: "0 Completed quizzes", icon: LineAwesomeIcons.puzzle_piece, onPress:(){}, endIcon: true,textColor: textColor,),
