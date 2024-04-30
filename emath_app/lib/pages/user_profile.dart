@@ -25,6 +25,7 @@ class _UserProfileState extends State<UserProfile> {
   String school ='';
   String year = '';
   String email = '';
+  String middle = '';
   User user = FirebaseAuth.instance.currentUser!;
 
 @override
@@ -51,11 +52,13 @@ Future<void> fetchUserDetails() async {
           final userschool = userDoc.get('school');
           final emailAddress = userDoc.get('email');
           final userLevel = userDoc.get('year');
+          final other = userDoc.get('otherNames');
           setState(() {
-            userName = '$firstName $lastName';
+            userName = '$firstName ${other[0]}. $lastName';
             school = '$userschool';
             email = '$emailAddress';
             year = '$userLevel';
+            
           });
         } else {
           print("User document not found"); // Handle missing document (optional)
