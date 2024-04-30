@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:emath_app/pages/dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -42,12 +43,19 @@ class _SignupPageState extends State<SignupPage> {
       );
 
     //Adding user details:
-
+    addUserDetails(_firstNameController.text.trim(), _surnameController.text.trim(), _emailController.text.trim(), _otherNameController.text.trim(), _schoolController.text.trim(), _dobcontroller.text.trim());
+    
   }
 
-  Future addUserDetails() async {
+  Future addUserDetails(String firstName,String lastName,String email,String othernames,String school,String dob) async {
     await FirebaseFirestore.instance.collection("users").add({
-      ''
+      'firstName': firstName,
+      'lastName': lastName,
+      'otherNames': othernames,
+      'email': email,
+      'school': school,
+      'dateOfBirth': dob
+
     });
   }
 
@@ -68,7 +76,15 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    _emailController.dispose();
+    _firstNameController.dispose();
+    _surnameController.dispose();
+    _schoolController.dispose();
+    _confpasswordController.dispose();
+    _passwordController.dispose();
+    _dobcontroller.dispose();
+    _otherNameController.dispose();
+    _levelController.dispose();
     super.dispose();
   }
 
@@ -391,6 +407,7 @@ class _SignupPageState extends State<SignupPage> {
                     SizedBox(
                       height: 10,
                     ),
+
                     // Sign Up Button
                     ElevatedButton(
                       onPressed: () {
@@ -407,7 +424,9 @@ class _SignupPageState extends State<SignupPage> {
                         if (_signupKey.currentState!.validate()) {
                           debugPrint("Name: ${_emailController.text}");
                           debugPrint("Password: ${_passwordController.text}");
-                          // Navigator.pop(context);
+                          
+                          signUp();
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DashboardProfile()));
                         }
                       },
                       child: Text("Sign Up"),

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emath_app/pages/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,56 @@ class _UserProfileState extends State<UserProfile> {
   var isDark = false;
   var myBackgroundColor = Colors.white;
   var textColor = Colors.black;
-  final user = FirebaseAuth.instance.currentUser!;
+  String userName = "";
+  User user = FirebaseAuth.instance.currentUser!;
+
+@override
+void initState(){
+  super.initState();
+  fetchUserFullName();
+}
+
+
+  // Future<void> fetchUserFullName() async {
+    
+  //   final user = FirebaseAuth.instance.currentUser!;
+  //   final userDoc = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+  //   final firstName = userDoc.get('firstName');
+  //   final lastName = userDoc.data()?['school']?? user.uid;
+  //   setState(() {
+  //     userName = '$firstName $lastName';
+  //   });
+    
+  // }
+
+  Future<void> fetchUserFullName() async {
+  try {
+    final user = FirebaseAuth.instance.currentUser; // Check if user is not null
+    if (user != null) {
+      final userDoc = await FirebaseFirestore.instance.collection("users").doc('KjHVHZ7D0BxPbBTshZHq').get();
+
+      if (userDoc.exists) {
+        final firstName = userDoc.get('firstName');
+        final lastName = userDoc.data()?['school'] ?? '';
+        setState(() {
+          userName = '$firstName $lastName';
+        });
+      } else {
+        print("User document not found"); // Handle missing document (optional)
+      }
+    } else {
+      print("User not signed in"); // Handle user not signed in (optional)
+    }
+  } catch (error) {
+    print("Error fetching user data: $error"); // Handle errors
+  }
+}
+
+
+  
+
+  
+  
   //////////////Constructor field: not compulsory
   
   //////////////Method field
@@ -51,6 +101,7 @@ class _UserProfileState extends State<UserProfile> {
 
       body: SingleChildScrollView(
         child: Container(
+
           color: myBackgroundColor,
           padding: const EdgeInsets.all(50),
           child:   Column(children: [
@@ -59,8 +110,8 @@ class _UserProfileState extends State<UserProfile> {
               child: CircleAvatar(radius:20,backgroundImage:  AssetImage("assets/download.jpeg")),
             ),
             const SizedBox(height: 10),
-            Text(user.email!, style:Theme.of(context).textTheme.headlineMedium!.copyWith(color: textColor)),
-            Text("Accra-Ghana", style:Theme.of(context).textTheme.headlineSmall!.copyWith(color: textColor)),
+            Text(userName, style:Theme.of(context).textTheme.headlineMedium!.copyWith(color: textColor)),
+            Text(user.email!, style:Theme.of(context).textTheme.headlineSmall!.copyWith(color: textColor)),
             const SizedBox(height: 20),
             SizedBox(
               width: 200,
