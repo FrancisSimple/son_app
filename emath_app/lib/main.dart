@@ -1,10 +1,10 @@
+import 'package:emath_app/firebase_options.dart';
 import 'package:emath_app/pages/dashboard.dart';
 // ignore_for_file: prefer_const_constructors
 
 import 'package:emath_app/pages/homepage.dart';
 import 'package:emath_app/pages/login.dart';
 import 'package:emath_app/pages/signup.dart';
-import 'package:emath_app/pages/subjects_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,7 +12,7 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if(kIsWeb){
-    await Firebase.initializeApp(options: FirebaseOptions(apiKey: "AIzaSyDeHSG-cearCEwcEeAjoAtNP9bYApD4u0o", appId: "1:880245869181:web:e94dd3438725d9a4f1ff14", messagingSenderId: "880245869181", projectId: "sonemathappdatabase",));
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   }
   await Firebase.initializeApp();
   runApp(const MyApp());
