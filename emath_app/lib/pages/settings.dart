@@ -13,11 +13,11 @@ class UserSettings extends ConsumerWidget {
   static bool checkState1 = true;
   static bool checkState2 = true;
   static bool checkState3 = true;
-  static bool checkState4 = true;
+  static bool checkState4 = false;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // String logoLink = ref.watch(logoLinkProvider);
+    String logoLink = ref.watch(logoLinkProvider);
     switchState = ref.watch(settingsThemeProvider);
 
     ThemeNotifier themeController = ref.watch(themeProvider.notifier);
@@ -73,22 +73,22 @@ class UserSettings extends ConsumerWidget {
                     Text("Theme: "),
                     FlutterSwitch(
                       value: switchState,
-                      activeIcon: Icon(Icons.dark_mode_outlined),
-                      inactiveIcon: Icon(Icons.light_mode_outlined),
+
                       onToggle: (val) {
                         switchState = val;
-                        if (switchState == false) {
-                          themeController.changeTheme();
-                          themeIconController.changeThemeIcon();
-                          logoLinkController.changeLogoLink();
-                          settingsThemeController.changeThemeBool();
-                        } else {
-                          themeController.changeTheme();
-                          themeIconController.changeThemeIcon();
-                          logoLinkController.changeLogoLink();
-                          settingsThemeController.changeThemeBool();
-                        }
+
+                        settingsThemeController.changeThemeBool();
+                        themeController.changeTheme();
+                        themeIconController.changeThemeIcon();
+                        logoLinkController.changeLogoLink();
                       },
+                      // inactiveText: "He",
+                      inactiveIcon: Icon(
+                        Icons.light_mode_outlined,
+                        color: Theme.of(context).primaryColorLight,
+                      ),
+                      activeIcon: Icon(Icons.dark_mode_outlined,
+                          color: Colors.deepOrange.shade800),
                       activeColor: Colors.deepOrange.shade800,
                       inactiveColor: Theme.of(context).primaryColorLight,
                     ),
@@ -147,6 +147,7 @@ class UserSettings extends ConsumerWidget {
                                 // ),
                                 // Username
                                 TextField(
+                                  keyboardType: TextInputType.name,
                                   decoration: InputDecoration(
                                     // alignLabelWithHint: true,
                                     // icon: Icon(Icons.person_rounded),
@@ -349,13 +350,176 @@ class UserSettings extends ConsumerWidget {
                   Checkbox(
                     value: checkState4,
                     // side: BorderSide(style: BorderStyle.solid),
-                    onChanged: (val) {},
+                    onChanged: (val) {
+                      checkState4 = val!;
+
+                      if (checkState4 == true) {
+                        checkState4 = false;
+                      } else {
+                        checkState4 = true;
+                      }
+                    },
                     shape: CircleBorder(eccentricity: 0),
                   )
                 ],
               ),
               SizedBox(
                 height: 10,
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text("Terminate Account"),
+              ),
+
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Payment",
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              Divider(),
+              SizedBox(
+                height: 10,
+              ),
+              Card(
+                elevation: 10,
+                child: Container(
+                  padding: EdgeInsets.all(15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Card",
+                        textAlign: TextAlign.left,
+                        // style: TextStyle(),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      TextField(
+                        keyboardType: TextInputType.name,
+                        decoration: InputDecoration(
+                          alignLabelWithHint: true,
+                          // icon: Icon(Icons.person_rounded),
+                          hintText: "Name of account holder",
+                          // constraints: BoxConstraints(minHeight: 20),
+                          prefixIcon: Icon(Icons.person_outline),
+                          // suffixIcon: IconButton(
+                          //     onPressed: () {}, icon: Icon(Icons.check)),
+                          labelText: "Account Holder",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50)),
+                          contentPadding: EdgeInsets.all(0),
+                          prefixIconColor: Colors.orange[900],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      // Card Number
+                      TextField(
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          alignLabelWithHint: true,
+                          // icon: Icon(Icons.person_rounded),
+                          hintText: "Card number",
+                          // constraints: BoxConstraints(minHeight: 20),
+                          prefixIcon: Icon(Icons.add_card),
+                          // suffixIcon: IconButton(
+                          //     onPressed: () {}, icon: Icon(Icons.check)),
+                          labelText: "Card Number",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50)),
+                          contentPadding: EdgeInsets.all(0),
+                          prefixIconColor: Colors.orange[900],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      // Expiry Date
+                      TextField(
+                        keyboardType: TextInputType.datetime,
+                        decoration: InputDecoration(
+                          alignLabelWithHint: true,
+                          // icon: Icon(Icons.person_rounded),
+                          hintText: "day / month / year",
+                          // constraints: BoxConstraints(minHeight: 20),
+                          prefixIcon: Icon(Icons.date_range_outlined),
+                          // suffixIcon: IconButton(
+                          //     onPressed: () {}, icon: Icon(Icons.check)),
+                          labelText: "Expiry Date",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50)),
+                          contentPadding: EdgeInsets.all(0),
+                          prefixIconColor: Colors.orange[900],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      // CVV
+                      TextField(
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          alignLabelWithHint: true,
+                          // icon: Icon(Icons.person_rounded),
+                          hintText: "C V V",
+                          // constraints: BoxConstraints(minHeight: 20),
+                          prefixIcon: Icon(Icons.date_range_outlined),
+                          // suffixIcon: IconButton(
+                          //     onPressed: () {}, icon: Icon(Icons.check)),
+                          labelText: "CVV",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50)),
+                          contentPadding: EdgeInsets.all(0),
+                          prefixIconColor: Colors.orange[900],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      // Save Button
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          ElevatedButton(onPressed: () {}, child: Text("Save")),
+                          SizedBox(width: 30,)
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Text(
+                "About",
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              Divider(),
+              // SizedBox(
+              //   height: 10,
+              // ),
+              Image.asset(
+                logoLink,
+                height: 200,
+              ),
+              Column(
+                children: [
+                  Text("~ V1.1.0"),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text("scholaropportunitynexus@gmail.com"),
+                  ),
+                  SizedBox(height: 10,),
+                  ElevatedButton(onPressed: (){}, child: Text("Report an Error"))
+                ],
+              ),
+              SizedBox(
+                height: 50,
               ),
             ],
           ))

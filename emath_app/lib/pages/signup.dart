@@ -90,6 +90,36 @@ class SignupPage extends ConsumerWidget {
                     SizedBox(
                       height: 10,
                     ),
+                    // First Name Section
+                    SizedBox(
+                      width: 280,
+                      child: TextFormField(
+                        // controller: _emailController,
+                        keyboardType: TextInputType.name,
+                        decoration: InputDecoration(
+                          // alignLabelWithHint: true,
+                          // icon: Icon(Icons.person_rounded),
+                          hintText: "Your first name",
+                          prefixIcon: Icon(Icons.person_outline),
+                          labelText: "First Name",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50)),
+                          contentPadding: EdgeInsets.all(15),
+                          prefixIconColor: Colors.orange[900],
+                        ),
+                        validator: (value) {
+                          // if (value == null || value.isEmpty) {
+                          //   return "Please enter surname";
+                          // }
+                          // return null;
+                        },
+                        // textAlign: TextAlign.center,
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 20,
+                    ),
                     // Surname Section
                     SizedBox(
                       width: 280,
