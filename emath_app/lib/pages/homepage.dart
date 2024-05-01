@@ -2,33 +2,45 @@
 
 import 'package:emath_app/pages/dashboard.dart';
 import 'package:emath_app/pages/login.dart';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
+  static IconData themeIcon = Icons.dark_mode_outlined;
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
-    navToLogin() {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const LoginPage()));
-    }
+    // navToLogin() {
+    //   Navigator.of(context)
+    //       .push(MaterialPageRoute(builder: (context) => const LoginPage()));
+    // }
 
-    navToSignup() {
-      Navigator.pushReplacementNamed(context, '/signuppage');
-    }
+    // navToSignup() {
+    //   Navigator.pushReplacementNamed(context, '/signuppage');
+    // }
 
-    changeMode() {
-      setState(() {
-        // _brightness = Brightness.dark;
-      });
-    }
+    // changeMode() {
+    //   setState(() {
+    //     // _brightness = Brightness.dark;
+    //   });
+    // }
+
+    // String logoLink = ref.watch(logoLinkProvider);
+
+    // ThemeNotifier themeController = ref.watch(themeProvider.notifier);
+    // ThemeIconNotifier themeIconController = ref.watch(themeIconProvider.notifier);
+    // LogoLinkNotifier logoLinkController = ref.watch(logoLinkProvider.notifier);
+    // SettingsThemeNotifier settingsThemeController =
+    //     ref.watch(settingsThemeProvider.notifier);
+
 
     return Scaffold(
 

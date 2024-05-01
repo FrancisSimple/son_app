@@ -2,18 +2,20 @@
 
 //import 'package:flutter/cupertino.dart';
 // import 'package:emath_app/pages/dashboard.dart';
+import 'package:emath_app/pages/providers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 //import 'package:flutter/widgets.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  ConsumerState<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
@@ -35,6 +37,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    String logoLink = ref.watch(logoLinkProvider);
+    
     return Scaffold(
       body: Center( //Center content
         child: Container(
@@ -46,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
             padding: EdgeInsets.all(20),
             children: [
               Image(
-                image: AssetImage("assets/logo.png"), //SON Logo
+                image: AssetImage(logoLink), //SON Logo
                 height: 200,
               ),
               Center(
@@ -128,10 +132,11 @@ class _LoginPageState extends State<LoginPage> {
                     ElevatedButton( 
                       onPressed: () {
                         if (_loginKey.currentState!.validate()) {
-                          debugPrint("Name: ${_usernameController.text}");
-                          debugPrint("Password: ${_passwordController.text}");
-                          signIn();
-                          // Navigator.pop(context);
+                          // debugPrint("Name: ${_usernameController.text}");
+                          // debugPrint("Password: ${_passwordController.text}");
+                          // signIn();
+                          // // Navigator.pop(context);
+                          debugPrint("Sign in Successful");
                         }
                       },
                       child: Text("Login"),

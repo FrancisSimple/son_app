@@ -1,5 +1,6 @@
 import 'package:emath_app/customizedTools/self_made.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 List<SubjectCard> mySubjectCards = [
@@ -10,14 +11,14 @@ List<SubjectCard> mySubjectCards = [
 
 
 
-class SubjectsPage extends StatefulWidget {
+class SubjectsPage extends ConsumerStatefulWidget {
   const SubjectsPage({super.key});
 
   @override
-  State<SubjectsPage> createState() => _SubjectsPageState();
+  ConsumerState<SubjectsPage> createState() => _SubjectsPageState();
 }
 
-class _SubjectsPageState extends State<SubjectsPage> {
+class _SubjectsPageState extends ConsumerState<SubjectsPage> {
   
   @override
   Widget build(BuildContext context) {

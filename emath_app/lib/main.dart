@@ -4,10 +4,12 @@ import 'package:emath_app/pages/dashboard.dart';
 
 import 'package:emath_app/pages/homepage.dart';
 import 'package:emath_app/pages/login.dart';
+import 'package:emath_app/pages/providers.dart';
 import 'package:emath_app/pages/signup.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,31 +20,30 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(ProviderScope(child: const MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
-  final Brightness _brightness = Brightness.light;
+
+  @override
+  ConsumerState<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+  // final Brightness _brightness = Brightness.light;
+  static ThemeData appTheme = lightTheme;
+  // static String logoLink = "assets/logo.png";
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    appTheme = ref.watch(themeProvider);
+
     return MaterialApp(
       title: 'Elective Mathematics',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepOrange,
-          brightness: _brightness,
-        ),
-        useMaterial3: true,
-        brightness: _brightness,
-        appBarTheme: AppBarTheme(
-          centerTitle: true,
-          backgroundColor: Colors.orange,
-        ),
-      ),
+      theme: appTheme,
       //home: SubjectsPage(),
       routes: {
         "/": (context) => HomePage(),
