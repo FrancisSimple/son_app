@@ -43,6 +43,7 @@ dependencies:
   percent_indicator: ^4.2.3
   flutter_riverpod: ^2.5.1
   flutter_switch: ^0.3.2
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
@@ -96,3 +97,11 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/logo.png"
+  adaptive_icon_background: "#FFFFFF"
+  # adaptive_icon_foreground: "assets/logo_dark.png"
