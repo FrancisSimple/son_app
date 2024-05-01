@@ -44,13 +44,8 @@ class _MyAppState extends ConsumerState<MyApp> {
       title: 'Elective Mathematics',
       debugShowCheckedModeBanner: false,
       theme: appTheme,
-      //home: SubjectsPage(),
-      routes: {
-        "/": (context) => HomePage(),
-        "/loginpage": (context) => LoginPage(),
-        "/signuppage": (context) => SignupPage(),
-        "/dashboard": (context) => DashboardProfile(),
-      },
+      home: HomePage(),
+      
     );
   }
 }

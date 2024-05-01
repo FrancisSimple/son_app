@@ -2,6 +2,7 @@
 
 //import 'package:flutter/cupertino.dart';
 // import 'package:emath_app/pages/dashboard.dart';
+import 'package:emath_app/pages/dashboard.dart';
 import 'package:emath_app/pages/providers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -134,8 +135,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         if (_loginKey.currentState!.validate()) {
                           // debugPrint("Name: ${_usernameController.text}");
                           // debugPrint("Password: ${_passwordController.text}");
-                          // signIn();
-                          // // Navigator.pop(context);
+                          signIn();
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DashboardProfile()));
                           debugPrint("Sign in Successful");
                         }
                       },
