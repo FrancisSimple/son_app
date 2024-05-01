@@ -13,9 +13,9 @@ class UserSettings extends ConsumerStatefulWidget {
 }
 
 class _UserSettingsState extends ConsumerState<UserSettings> {
-  bool checkState1 = true;
+  bool checkState1 = false;
   bool checkState2 = false;
-  bool checkState3 = true;
+  bool checkState3 = false;
   bool checkState4 = false;
 
   @override
@@ -128,25 +128,25 @@ class _UserSettingsState extends ConsumerState<UserSettings> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           // Avatar
-                          const Expanded(
-                            flex: 2,
-                            child: CircleAvatar(
-                              radius: 50,
-                              child: Center(
-                                child: Icon(
-                                  Icons.person,
-                                  size: 70,
-                                ),
-                              ),
-                            ),
-                          ),
+                          // const Expanded(
+                          //   flex: 2,
+                          //   child: CircleAvatar(
+                          //     radius: 50,
+                          //     child: Center(
+                          //       child: Icon(
+                          //         Icons.person,
+                          //         size: 70,
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                           Expanded(
                             flex: 5,
                             child: Container(
                               margin:
                                   const EdgeInsets.symmetric(horizontal: 12),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                // crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   // Name
@@ -165,21 +165,21 @@ class _UserSettingsState extends ConsumerState<UserSettings> {
                                         Theme.of(context).textTheme.titleMedium,
                                   ),
                                   // Change Avatar
-                                  Row(
-                                    children: [
-                                      const Expanded(
-                                          flex: 1,
-                                          child: Text("Change Avatar")),
-                                      Expanded(
-                                        flex: 2,
-                                        child: TextButton.icon(
-                                            onPressed: () {},
-                                            icon: const Icon(
-                                                Icons.file_copy_outlined),
-                                            label: const Text("Choose Image")),
-                                      )
-                                    ],
-                                  ),
+                                  // Row(
+                                  //   children: [
+                                  //     const Expanded(
+                                  //         flex: 1,
+                                  //         child: Text("Change Avatar")),
+                                  //     Expanded(
+                                  //       flex: 2,
+                                  //       child: TextButton.icon(
+                                  //           onPressed: () {},
+                                  //           icon: const Icon(
+                                  //               Icons.file_copy_outlined),
+                                  //           label: const Text("Choose Image")),
+                                  //     )
+                                  //   ],
+                                  // ),
                                 ],
                               ),
                             ),
