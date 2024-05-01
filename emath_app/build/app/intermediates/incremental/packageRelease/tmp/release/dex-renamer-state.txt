@@ -1,4 +1,0 @@
-#Wed May 01 08:12:42 GMT 2024
-base.0=C\:\\Users\\samuel\\Documents\\GitHub\\son_app\\emath_app\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
-path.0=classes.dex
-renamed.0=classes.dex

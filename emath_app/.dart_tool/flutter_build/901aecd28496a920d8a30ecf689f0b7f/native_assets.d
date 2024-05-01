@@ -1,1 +1,0 @@
- C:\\Users\\samuel\\Documents\\GitHub\\son_app\\emath_app\\.dart_tool\\flutter_build\\901aecd28496a920d8a30ecf689f0b7f\\native_assets.yaml: 
