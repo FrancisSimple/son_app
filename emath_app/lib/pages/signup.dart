@@ -426,8 +426,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                         }
                         if (_signupKey.currentState!.validate()) {
                           debugPrint("Name: ${_emailController.text}");
-                          debugPrint("Password: ${_passwordController.text}");
-                          
+                          debugPrint("Password: ${_passwordController.text}");                          
                           signUp();
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DashboardProfile()));
                         }
