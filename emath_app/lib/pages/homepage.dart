@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
       Navigator.pushReplacementNamed(context, '/signuppage');
     }
 
-    _changeMode() {
+    changeMode() {
       setState(() {
         // _brightness = Brightness.dark;
       });

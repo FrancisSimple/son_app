@@ -347,7 +347,7 @@ class _SignupPageState extends State<SignupPage> {
                       ],
                       onSelected: (value) {
                         if (value == null) {
-                          debugPrint(value);
+                          // debugPrint(value);
                           setState(() {
                             _errortextLevel = "Please enter a valid level";
                           });
