@@ -1,11 +1,11 @@
 import 'package:emath_app/firebase_options.dart';
-import 'package:emath_app/pages/dashboard.dart';
+// import 'package:emath_app/pages/dashboard.dart';
 // ignore_for_file: prefer_const_constructors
 
 import 'package:emath_app/pages/homepage.dart';
-import 'package:emath_app/pages/login.dart';
+// import 'package:emath_app/pages/login.dart';
 import 'package:emath_app/pages/providers.dart';
-import 'package:emath_app/pages/signup.dart';
+// import 'package:emath_app/pages/signup.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';

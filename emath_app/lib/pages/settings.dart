@@ -1,7 +1,7 @@
 import 'package:emath_app/pages/providers.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+// import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
@@ -567,7 +567,7 @@ class _UserSettingsState extends ConsumerState<UserSettings> {
                             // icon: Icon(Icons.person_rounded),
                             hintText: "C V V",
                             // constraints: BoxConstraints(minHeight: 20),
-                            prefixIcon: const Icon(Icons.date_range_outlined),
+                            prefixIcon: const Icon(Icons.account_balance_wallet_outlined),
                             // suffixIcon: IconButton(
                             //     onPressed: () {}, icon: Icon(Icons.check)),
                             labelText: "CVV",

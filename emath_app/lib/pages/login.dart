@@ -4,6 +4,7 @@
 // import 'package:emath_app/pages/dashboard.dart';
 import 'package:emath_app/pages/dashboard.dart';
 import 'package:emath_app/pages/providers.dart';
+import 'package:emath_app/pages/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,14 +23,29 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   final GlobalKey<FormState> _loginKey = GlobalKey();
+  final RegExp emailRegex = RegExp(
+    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+    // caseSensitive: false,
+  );
 
   Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: _usernameController.text.trim(), password: _passwordController.text.trim(),
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _usernameController.text.trim(),
+        password: _passwordController.text.trim(),
       );
+    } catch (e) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
+      debugPrint("Sign In Error");
+    }
+    if (!context.mounted) return;
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DashboardProfile()));
+    debugPrint("Sign in Successful");
   }
 
- @override
+  @override
   void dispose() {
     _usernameController.dispose();
     _passwordController.dispose();
@@ -39,15 +55,17 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   @override
   Widget build(BuildContext context) {
     String logoLink = ref.watch(logoLinkProvider);
-    
+
     return Scaffold(
-      body: Center( //Center content
+      body: Center(
+        //Center content
         child: Container(
           alignment: Alignment.center,
           height: 700,
           padding: EdgeInsets.symmetric(horizontal: 20),
           // color: Colors.amber,
-          child: ListView( //Create scrollable Content
+          child: ListView(
+            //Create scrollable Content
             padding: EdgeInsets.all(20),
             children: [
               Image(
@@ -55,7 +73,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 height: 200,
               ),
               Center(
-                child: Text( //Login Header Text
+                child: Text(
+                  //Login Header Text
                   "Login",
                   style: TextStyle(
                     fontSize: 30,
@@ -63,10 +82,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox( // Space between Header and Form
+              SizedBox(
+                // Space between Header and Form
                 height: 20,
               ),
-              Form( // Login Form
+              Form(
+                // Login Form
                 key: _loginKey,
                 child: Column(
                   children: [
@@ -76,15 +97,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     //Username Section
                     SizedBox(
                       width: 280,
-                      child: TextFormField( 
+                      child: TextFormField(
                         controller: _usernameController,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           // alignLabelWithHint: true,
                           // icon: Icon(Icons.person_rounded),
-                          hintText: "Your username/email/phone",
-                          prefixIcon: Icon(Icons.person),
-                          labelText: "Username/Email/Phone",
+                          hintText: "Your email",
+                          prefixIcon: Icon(Icons.email_outlined),
+                          labelText: "Email",
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(50)),
                           contentPadding: EdgeInsets.all(15),
@@ -92,9 +113,17 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "Please enter username, email or phone number";
+                            return "Please enter a valid email ";
+                          } else if (emailRegex
+                                  .hasMatch(_usernameController.text) ==
+                              false) {
+                            debugPrint("Executed");
+                            return "Please enter a valid email ";
+                          } else {
+                            return null;
                           }
-                          return null;
+
+                          // return null;
                         },
                         // textAlign: TextAlign.center,
                       ),
@@ -105,7 +134,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     //Password
                     SizedBox(
                       width: 280,
-                      child: TextFormField( 
+                      child: TextFormField(
                         controller: _passwordController,
                         obscureText: true,
                         decoration: InputDecoration(
@@ -130,15 +159,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       height: 10,
                     ),
                     //Login Button
-                    ElevatedButton( 
+                    ElevatedButton(
                       onPressed: () {
                         if (_loginKey.currentState!.validate()) {
                           // debugPrint("Name: ${_usernameController.text}");
                           // debugPrint("Password: ${_passwordController.text}");
-                          signIn();
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DashboardProfile()));
-                          debugPrint("Sign in Successful");
+                          signIn;
                         }
+                        debugPrint(
+                            "Email Regex: ${emailRegex.hasMatch(_usernameController.text)}");
                       },
                       child: Text("Login"),
                     )
@@ -152,13 +181,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               // sign up option
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacementNamed("/signuppage");
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SignupPage()));
                 },
                 child: Text("Don't have an account? Sign Up"),
               )
             ],
           ),
-       ),
+        ),
       ),
     );
   }

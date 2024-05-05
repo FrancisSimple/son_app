@@ -61,13 +61,13 @@ Future<void> fetchUserDetails() async {
             
           });
         } else {
-          print("User document not found"); // Handle missing document (optional)
+          debugPrint("User document not found"); // Handle missing document (optional)
         }
       } else {
-        print("User not signed in"); // Handle user not signed in (optional)
+        debugPrint("User not signed in"); // Handle user not signed in (optional)
       }
     } catch (error) {
-      print("Error fetching user data: $error"); // Handle errors
+      debugPrint("Error fetching user data: $error"); // Handle errors
     }
   }
 
