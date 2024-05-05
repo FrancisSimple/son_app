@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emath_app/pages/dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:emath_app/pages/login.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SignupPage extends ConsumerStatefulWidget {
@@ -443,7 +444,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
               // Alternate Login Link
               TextButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed("/loginpage");
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginPage()));
                   },
                   child: Text("Have an account? Log In"))
             ],

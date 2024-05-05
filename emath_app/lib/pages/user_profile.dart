@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:emath_app/pages/login.dart';
+// import 'package:emath_app/pages/signup.dart';   F
 
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -132,7 +134,7 @@ Future<void> fetchUserDetails() async {
             ProfileListTile(title: "0 Activated Topic(s)", icon: LineAwesomeIcons.check_circle, onPress:(){}, endIcon: true,textColor: textColor,),
             ProfileListTile(title: "0 Completed quizzes", icon: LineAwesomeIcons.puzzle_piece, onPress:(){}, endIcon: true,textColor: textColor,),
             ProfileListTile(title: "0 % Performance rate", icon: LineAwesomeIcons.medal, onPress:(){}, endIcon: false,textColor: textColor,),
-            ProfileListTile(title: "Logout", icon: LineAwesomeIcons.alternate_sign_out, onPress:(){FirebaseAuth.instance.signOut();}, endIcon: false,textColor: Colors.orange),
+            ProfileListTile(title: "Logout", icon: LineAwesomeIcons.alternate_sign_out, onPress:(){FirebaseAuth.instance.signOut();Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const LoginPage()));}, endIcon: false,textColor: Colors.orange),
           ],
           ),
         ),

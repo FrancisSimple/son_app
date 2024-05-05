@@ -27,23 +27,26 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
     // caseSensitive: false,
   );
+  static bool seePassword = false;
 
-  Future signIn() async {
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _usernameController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
-    } catch (e) {
-      if (!context.mounted) return;
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(e.toString())));
-      debugPrint("Sign In Error");
-    }
-    if (!context.mounted) return;
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DashboardProfile()));
-    debugPrint("Sign in Successful");
-  }
+  // Future signIn() async {
+  //   try {
+  //     await FirebaseAuth.instance.signInWithEmailAndPassword(
+  //       email: _usernameController.text.trim(),
+  //       password: _passwordController.text.trim(),
+  //     );
+  //   } on FirebaseAuthException catch (e) {
+  //     if (e.code == 'user-not-found') {
+  //       ScaffoldMessenger.of(context)
+  //           .showSnackBar(SnackBar(content: Text(e)));
+  //       debugPrint("Sign In Error");
+  //     } else if (e.code == 'wrong-password') {
+  //       ScaffoldMessenger.of(context)
+  //           .showSnackBar(SnackBar(content: Text('Wrong Password')));
+  //       debugPrint("Sign In Error");
+  //     }
+  //   }
+  // }
 
   @override
   void dispose() {
@@ -136,9 +139,20 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       width: 280,
                       child: TextFormField(
                         controller: _passwordController,
-                        obscureText: true,
+                        obscureText: !seePassword,
                         decoration: InputDecoration(
                             prefixIcon: Icon(Icons.password),
+                            suffixIcon: IconButton(onPressed: () {
+                              if (seePassword == true) {
+                                setState(() {
+                                  seePassword = false;
+                                });
+                              }else {
+                                setState(() {
+                                  seePassword = true;
+                                });
+                              }
+                            },icon: Icon(Icons.remove_red_eye_outlined)),
                             hintText: "Your Password",
                             labelText: "Password",
                             border: OutlineInputBorder(
@@ -160,11 +174,31 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     ),
                     //Login Button
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_loginKey.currentState!.validate()) {
                           // debugPrint("Name: ${_usernameController.text}");
                           // debugPrint("Password: ${_passwordController.text}");
-                          signIn;
+                          try {
+                            await FirebaseAuth.instance
+                                .signInWithEmailAndPassword(
+                              email: _usernameController.text.trim(),
+                              password: _passwordController.text.trim(),
+                            );
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DashboardProfile()));
+                            debugPrint("Sign in Successful");
+                          }  catch (e) {
+                            // if (e.code == 'user-not-found') {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Center(child: Text("Wrong username or password"))));
+                            debugPrint("Sign In Error");
+                            // } else if (e.code == 'wrong-password') {
+                            // ScaffoldMessenger.of(context).showSnackBar(
+                            //     SnackBar(content: Text('Wrong Password')));
+                            // debugPrint("Sign In Error");
+                          }
                         }
                         debugPrint(
                             "Email Regex: ${emailRegex.hasMatch(_usernameController.text)}");
@@ -181,7 +215,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               // sign up option
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SignupPage()));
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => SignupPage()));
                 },
                 child: Text("Don't have an account? Sign Up"),
               )
